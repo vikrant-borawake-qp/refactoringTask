@@ -1,30 +1,23 @@
-import { DiscountTypeEnum } from "../enums/discountType";
-
-export class Customer {
-  customerName: string;
-  discountType: DiscountTypeEnum; // "Regular", "Premium", "VIP"
+class Customer {
+  name: string;
+  type: string; // "Regular", "Premium", "VIP"
   discount: number;
 
-  constructor(customerName: string, discountType: DiscountTypeEnum) {
-    this.customerName = customerName;
-    this.discountType = discountType;
+  constructor(name: string, type: string) {
+    this.name = name;
+    this.type = type;
     this.setDiscount();
   }
 
   setDiscount(): void {
-    this.discount = this.getDiscountValue(this.discountType);
-  }
-
-  getDiscountValue(discountType: DiscountTypeEnum): number {
-    switch (discountType) {
-      case DiscountTypeEnum.REGULAR:
-        return 0.05;
-      case DiscountTypeEnum.PREMIUM:
-        return 0.1;
-      case DiscountTypeEnum.VIP:
-        return 0.2;
-      default:
-        return 0;
+    if (this.type === "Regular") {
+      this.discount = 0.05;
+    } else if (this.type === "Premium") {
+      this.discount = 0.1;
+    } else if (this.type === "VIP") {
+      this.discount = 0.2;
+    } else {
+      this.discount = 0;
     }
   }
 }
