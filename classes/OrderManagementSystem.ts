@@ -1,16 +1,12 @@
-import { DiscountTypeEnum } from "../enums/discountType";
-import { Customer } from "./Customer";
-import { Order } from "./Order";
-
 // Order Management System - Handles orders
-export class OrderManagementSystem {
+class OrderManagementSystem {
   static main(): void {
-    const customer = new Customer("John Doe", DiscountTypeEnum.VIP);
+    const customer = new Customer("John Doe", "VIP");
     const order = new Order(customer);
 
-    order.addItem({ itemName: "Laptop", price: 1000 });
-    order.addItem({ itemName: "Mouse", price: 50 });
-    order.addItem({ itemName: "Keyboard", price: 80 });
+    order.addItem("Laptop", 1000);
+    order.addItem("Mouse", 50);
+    order.addItem("Keyboard", 80);
 
     order.printOrder();
 
@@ -19,7 +15,10 @@ export class OrderManagementSystem {
 
   static generateInvoice(order: Order): void {
     console.log("Generating Invoice...");
-    order.printOrder();
+    console.log(`Customer: ${order.customer.name}`);
+    console.log(`Total: $${order.totalPrice}`);
+    console.log(`Discounted Total: $${order.discountedPrice}`);
+    console.log(`Items: ${order.items.join(", ")}`);
     console.log("Thank you for shopping with us!");
   }
 }
